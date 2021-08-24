@@ -1,0 +1,9 @@
+.create-supplier-container form{
+    display:flex;
+    flex-direction:column;
+    width:500px;
+}
+
+.create-supplier-container button{
+    margin-top:50px;
+}

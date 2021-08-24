@@ -1,0 +1,14 @@
+.content-layout{
+    margin: 0 auto;
+    width:1500px;
+    background-color: white;
+    padding-left:50px;
+    padding-right:50px;
+
+}
+.background{
+    background-image: url(../../images/bgwallpaper.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}

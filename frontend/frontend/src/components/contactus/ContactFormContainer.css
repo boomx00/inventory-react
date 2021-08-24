@@ -1,0 +1,10 @@
+.contactform-container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-around;
+    height: 600px;
+    width:90%;
+    margin-left: 70px;
+    position:relative;
+    top:-150px;
+}

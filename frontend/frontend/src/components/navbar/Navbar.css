@@ -1,0 +1,19 @@
+.navbar-main{
+    display:flex;
+    justify-content:flex-end;
+    border-bottom: 2px solid red;
+}
+.navbar-main a{
+    padding-right:50px;
+    line-height:135px;
+    color:black
+}
+.navbar-logo-container{
+}
+.navbar-logo-image{
+    height:100px;
+    width:100px;
+}
+.navbar-list{
+    margin-left:auto;
+}

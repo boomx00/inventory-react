@@ -1,0 +1,19 @@
+body{
+    background: #e7e9eb;
+}
+.dashboard-main{
+    background: #e7e9eb;
+    height:100vh;
+}
+.dashboard-contents{
+    margin:0 auto;
+
+}
+
+.dashboard-contents{
+    padding-bottom:20px;
+    padding-top:20px;
+    width:90%;
+    height:94vh;
+    background-color: white;
+}

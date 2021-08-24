@@ -1,0 +1,55 @@
+.purchase-create-form-container{
+    width:90%;
+    margin: 0 auto;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom:50px;
+}
+.form-left{
+    width:40%;
+    display:flex;
+    flex-direction: column;
+}
+.form-right{
+    width:40%;
+
+    display:flex;
+    flex-direction: column;
+}
+
+.products-container{
+    width:81%;
+    margin: 0 auto;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+.add-product{
+    margin-bottom: 10px;
+}
+
+.create-purchase-total-wrapper{
+    display:flex;
+    flex-direction: column;
+    padding-top:50px;
+}
+.create-purchase-total{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction:row
+}
+.create-purchase-paid{
+    display: flex;
+    flex-direction:row;
+    justify-content: flex-end;
+    padding-top:10px;
+}

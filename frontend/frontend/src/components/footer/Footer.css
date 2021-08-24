@@ -1,0 +1,33 @@
+.footer-start{
+    margin-top:50px;
+    padding-top:20px;
+    background-color: rgba(110, 110, 110, 0.3);
+        text-align:center;
+    
+}
+.footer-image img{
+
+    height:100px;
+    width:100px;
+}
+.footer-container{
+ 
+}
+.logos img{
+    width:40px;
+    height:40px;
+}
+.logoalign{
+    margin-left: 30px;
+
+}
+.footer-bottom{
+    font-size: 40px;
+    text-align: center;
+}
+.logos{
+    padding-top:50px;
+}
+label{
+    padding-top:15px;
+}

@@ -1,0 +1,16 @@
+.quantity-logo{
+    display:flex;
+    flex-direction: row;
+}
+
+.info-logo{
+    margin-top:3px;
+    padding-left:5px;
+}
+.info-logo .tooltiptext {
+    visibility: hidden;
+}
+.sales-information-table{
+    white-space: pre-wrap;
+
+}

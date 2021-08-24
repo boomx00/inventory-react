@@ -1,0 +1,9 @@
+.create-inventory-container form{
+    display:flex;
+    flex-direction:column;
+    width:500px;
+}
+
+.create-inventory-container button{
+    margin-top:50px;
+}

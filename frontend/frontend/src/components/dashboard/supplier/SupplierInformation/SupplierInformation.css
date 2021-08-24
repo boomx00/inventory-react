@@ -1,0 +1,15 @@
+.information-container{
+    width:500px;
+    margin: 0 auto;
+}
+.information-container form{
+    display:flex;
+    flex-direction: column;
+}
+.information-container button{
+    margin-top:20px;
+}
+
+.another{
+    /* background-color: purple; */
+}
