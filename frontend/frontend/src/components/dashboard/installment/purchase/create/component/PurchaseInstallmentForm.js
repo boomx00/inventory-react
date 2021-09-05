@@ -8,6 +8,9 @@ const PurchaseInstallmentForm = () =>{
         //   onChange={(text)=>{setCode(text.target.value);sendData()}}
         //   disabled={props.editable?false:true}
           ></input>
+          <label>Purchase Ref</label>
+          <input>
+          </input>
           <label>Supplier</label>
           <input 
         //   value={supplier} 

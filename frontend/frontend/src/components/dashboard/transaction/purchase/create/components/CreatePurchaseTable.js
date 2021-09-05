@@ -7,6 +7,7 @@ const CreatePurchaseTable = (props) =>{
     const history = new useHistory()
   const [modalShow, setModalShow] = useState(false);
   const [edit,setEdit] = useState(false);
+  const [total,setTotal] = useState();
   let counter = 0;
   const useStyles = makeStyles((theme) => ({
     customWidth: {
@@ -16,6 +17,25 @@ const CreatePurchaseTable = (props) =>{
   }));
   const classes = useStyles();
 
+  const onTotalChange=(value,code)=>{
+    let array=[]
+    if(props.action=="edit"){
+      array=props.data.map( obj => ({
+        ...obj
+      }))
+    }else if(props.action=="create"){
+     array = [...props.data]
+    }
+    let index = 0;
+      for(let i = 0 ; i < array.length;i++){
+          if(code == array[i].code){
+              index=i
+          }
+      }
+      // console.log(value)
+      array[index].price = value
+      props.onUpdatePrice(array)
+  }
   const updateQuantity=(value,code)=>{
     let array=[]
     
@@ -57,6 +77,8 @@ const CreatePurchaseTable = (props) =>{
     props.onEditPurchase()
     props.onSetEditable(data)
   }
+  
+
     return(
         <div className="products-container">
         <div className="add-product">
@@ -93,8 +115,12 @@ const CreatePurchaseTable = (props) =>{
                 </div>
                 </div>
                 </td>
-              <td>{products.price}</td>
-              <td>{products.price * products.quantity}</td>
+              <td>
+                <input type="number" onChange={(text)=>onTotalChange(text.target.value,products.code)}>
+                
+                </input>
+                </td>
+              <td>{products.price && products.quantity? products.price*products.quantity:0}</td>
               <td>
                 <button 
                 disabled={props.editable?false: edit?false:true}
@@ -118,7 +144,7 @@ const CreatePurchaseTable = (props) =>{
           <div className="create-sales-total">
             <h3>Total</h3>
             <input 
-            value={props.total} 
+            value={total} 
             disabled={true}></input>
             </div>
           <div className="create-sales-paid">

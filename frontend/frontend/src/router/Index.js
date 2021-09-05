@@ -20,6 +20,8 @@ import DashboardSalesView from '../pages/dashboard/transactions/sales/informatio
 import DashboardPurchase from '../pages/dashboard/transactions/purchase/Purchase'
 import DashboardPurchaseCreate from '../pages/dashboard/transactions/purchase/create/CreatePurchase'
 import DashboardPurchaseView from '../pages/dashboard/transactions/purchase/information/InformationPurchase'
+import DashboardPendingPurchaseView from '../pages/dashboard/transactions/purchase/information/PendingInformationPurchase'
+
 import DashboardPurchaseInstallment from '../pages/dashboard/installment/purchase/PurchaseInstallment'
 import DashboardPurchaseInstallmentCreate from '../pages/dashboard/installment/purchase/create/PurchaseInstallmentCreate'
 
@@ -67,6 +69,7 @@ const Index = ({ isLogged }) => {
             <Route path='/dashboard/purchase/' exact component={DashboardPurchase}/>
             <Route path='/dashboard/purchase/create' exact component={DashboardPurchaseCreate}/>
             <Route path='/dashboard/purchase/view/:path?' exact component={DashboardPurchaseView}/>
+            <Route path='/dashboard/pendingpurchase/view/:path?' exact component={DashboardPendingPurchaseView}/>
             <Route path='/dashboard/installment/purchase'  exact component={DashboardPurchaseInstallment}/>
             <Route path='/dashboard/installment/purchase/create'  exact component={DashboardPurchaseInstallmentCreate}/>
 

@@ -8,6 +8,7 @@ import mpoinproduct from "../../../images/mpoin-product.jpg";
 import rifenglogo from "../../../images/rifeng-logo.png";
 import rifengproduct from "../../../images/rifeng-product.png";
 import BrandImage from "./BrandImage"
+import aluveen from "../../../images/logo/aluveen.jpg"
 const Brands = () => {
   const [selected, setSelected] = useState();
 
@@ -22,11 +23,15 @@ const Brands = () => {
       image: mpoinproduct,
       logo: mpoinlogo
     },
-    {
-      id:'3',
-      image: rifengproduct,
-      logo: rifenglogo
-    }
+    // {
+    //   id:'3',
+    //   image: rifengproduct,
+    //   logo: rifenglogo
+    // },
+    // {
+    //   id:'4',
+    //   logo: aluveen
+    // }
   ]
   let out = ""
   function MouseLeave(e){
@@ -41,7 +46,7 @@ const Brands = () => {
     <div className="brands-container">
       <hr></hr>
 
-      <h2>Official Agents</h2>
+      <h2>Recomended Brands</h2>
       <div className="brands-images-container" >
         {image_data.map((images)=>(
             selected==null?
@@ -55,6 +60,7 @@ const Brands = () => {
 
 }
       </div>
+      <hr></hr>
     </div>
   );
 };

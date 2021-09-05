@@ -1,0 +1,24 @@
+.pl-header{
+    text-align: center;
+    padding-bottom:30px;
+}
+.mainpage-productlist{
+}
+.mainpage-categories-wrap{
+    display:flex;   
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-between;
+
+}
+.mainpage-categories-item{
+
+}
+.mainpage-categories-item img{
+    border-radius: 20px;
+    width:250px;
+    height:250px;
+}
+.mainpage-categories-item p{
+    text-align: center;
+}

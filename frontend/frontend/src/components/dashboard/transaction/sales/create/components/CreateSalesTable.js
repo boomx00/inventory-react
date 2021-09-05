@@ -40,7 +40,7 @@ const CreateSalesProducts=(props)=>{
   }
   const createSales = () =>{
     props.onCreateSales()
-    history.push('/dashboard/sales')
+    // history.push('/dashboard/sales')
   }
     return(
         <div className="products-container">

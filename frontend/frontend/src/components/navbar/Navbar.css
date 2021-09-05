@@ -2,6 +2,7 @@
     display:flex;
     justify-content:flex-end;
     border-bottom: 2px solid red;
+    background-color:white;
 }
 .navbar-main a{
     padding-right:50px;
@@ -9,6 +10,7 @@
     color:black
 }
 .navbar-logo-container{
+    margin-top:20px;
 }
 .navbar-logo-image{
     height:100px;

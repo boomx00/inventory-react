@@ -1,0 +1,47 @@
+.fproduct-container-solahart{
+    width: 100%;
+    height:400px;
+    background-color: #ffe400;
+    position: relative;
+    border: 5px #0054a1 solid;
+}
+.fproduct-container-mpoin{
+    width: 100%;
+    height:400px;
+    position: relative;
+    border: 5px black solid;
+}
+.test{
+    margin: 0 auto;
+    width:500px;
+    background-color: red;
+}
+.fproduct{
+    margin:0 auto;
+    padding-top:50px;
+    width:900px;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.fproduct img{
+    width:160px;
+    height:130px;
+}
+.fproduct p{
+    text-align:center;
+}
+.fproduct div{
+}
+
+.fproduct-logo{
+    padding-top:10px;
+    width: 400px;
+    margin: 0 auto;
+
+}
+.fproduct-logo img{
+    width:400px;
+    height:130px;
+}

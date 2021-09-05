@@ -4,6 +4,7 @@ const CreatePurchaseForm = (props) =>{
     const [supplier,setSupplier] = new useState(props.data.supplier)
     const [date,setDate] = new useState(props.data.date)
     const [notes,setNotes] = new useState(props.data.notes)
+    const [saleRef,setSaleRef] = new useState(props.data.saleRef)
   
     const sendData=()=>{
       const data={
@@ -17,6 +18,7 @@ const CreatePurchaseForm = (props) =>{
     }
     return(
         <div className="purchase-create-form-container">
+          <div onClick={()=>{console.log(saleRef)}}>asdfasdf</div>
         <div className="form-left">
           <label>Code</label>
           <input 
@@ -29,7 +31,11 @@ const CreatePurchaseForm = (props) =>{
           value={supplier} 
           onChange={(text)=>{setSupplier(text.target.value);sendData()}}
           disabled={props.editable?false:true}></input>
-         
+         <label>Sales Reference</label>
+          <input 
+          value={saleRef} 
+          onChange={(text)=>{setSupplier(text.target.value);sendData()}}
+          disabled={props.editable?false:true}></input>
         </div>
         <div className="form-right">
           <label>Date</label>
