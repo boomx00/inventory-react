@@ -33,10 +33,10 @@ export const orderSlice = createSlice({
             
         },
         updateOrders:(state,action)=>{
-            const index = state.orders.findIndex(orders=>orders.code==action.payload.code)
-            const newArray = [...state.orders]
-            newArray.splice(index, 1);
-            state.orders = newArray
+            const index = state.orders.findIndex(orders=>orders.code==action.payload.saleRef)
+            const orderCopy = [...state.orders]
+            orderCopy.splice(index, 1);
+            state.orders = orderCopy
             state.orders = [action.payload,...state.orders]
 
         }
@@ -63,7 +63,7 @@ export const addOrdersAction = (data)=>{
 export const updateOrdersAction = (data)=>{
     return async (dispatch)=>{
         try{
-            // console.log(data)
+            // console.log(data.saleRef)
             dispatch(updateOrders(data))
         }catch(err){
 

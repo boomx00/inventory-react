@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addPurchaseOrder } from "./purchaseOrderSlices";
 import { updatePurchaseOrdersAction } from "./purchaseOrderSlices";
-import { createPendingPurchaseOrderAction } from "./pendingPurchaseOrderSlices";
+import { createPendingPurchaseOrderAction, removePendingPurchaseOrder } from "./pendingPurchaseOrderSlices";
 export const pendingPurchaseSlice = createSlice({
     name:"pendingPurchase",
     initialState:{
         pendingPurchase:[
-            {id:1,code: "a", supplier: "d", date: "a", notes: "s", total: 0,unpaid:0}
         ]
     },
     reducers:{
@@ -15,6 +14,16 @@ export const pendingPurchaseSlice = createSlice({
             const newPurchase = {...action.payload,id:id}
                 state.pendingPurchase = [newPurchase,...state.pendingPurchase]
         },
+        removePendingPurchase:(state,action,getState)=>{
+            console.log(getState)
+            const copy = [...state.pendingPurchase]
+            let index = state.pendingPurchase.findIndex(purchase=>purchase.saleRef == action.payload)
+            copy.splice(index,1)
+            state.pendingPurchase = copy
+        },
+        checkPendingPurchase:(state,action)=>{
+            return "popo"
+        }
        
       
     }
@@ -22,11 +31,24 @@ export const pendingPurchaseSlice = createSlice({
 
 export const {
      createPendingPurchase,
-     setInventoryStock
+     setInventoryStock,
+     removePendingPurchase,
+     checkPendingPurchase
     // editPurchase
 } = pendingPurchaseSlice.actions;
 
 export default pendingPurchaseSlice.reducer
+
+Array.prototype.multiIndexOf = function (el) { 
+    var idxs = [];
+    for (var i = this.length - 1; i >= 0; i--) {
+        if (this[i].saleRef === el) {
+            idxs.unshift(i);
+        }
+    }
+    return idxs;
+};
+
 
 export const createPendingPurchaseAction=(data)=>{
     return async(dispatch)=>{
@@ -44,27 +66,34 @@ export const createPendingPurchaseAction=(data)=>{
     }
 }
 
-export const editPurchaseAction=(data)=>{
+export const checkPendingPurchaseAction=(data)=>{
     return async(dispatch)=>{
         try{
-            
-            // const newPurchaseData = {
-            //     code:data.code,
-            //     date: data.date,
-            //     supplier: data.supplier,
-            //     notes: data.notes,
-            //     total: data.total,
-            //     status:"paid"
-            // }
-            // const newPurchaseOrders = {
-            //     products: data.products,
-            //     code: data.code
-            // }
-            // console.log(newPurchaseOrders)
-            // dispatch(editPurchase(newPurchaseData))
-            // dispatch(updatePurchaseOrdersAction(newPurchaseOrders))
+            // console.log("checked")
+            const status =dispatch(checkPendingPurchase)
+            console.log(status)
         }
         catch(err){
+
+        }
+    }
+}
+
+export const removePendingPurchaseAction=(data)=>{
+    return async(dispatch,getState)=>{
+        try{
+            const {pendingPurchaseOrder} = getState();
+            var idxs = [];
+            for (var i = pendingPurchaseOrder.pendingPurchaseOrders.length - 1; i >= 0; i--) {
+                if (pendingPurchaseOrder.pendingPurchaseOrders[i].saleRef == data) {
+                    console.log(pendingPurchaseOrder.pendingPurchaseOrders[i])
+                }
+            }
+            console.log(idxs)
+            dispatch(removePendingPurchase(data))
+            dispatch(removePendingPurchaseOrder(data))
+        }catch(err){
+            console.log(err)
 
         }
     }

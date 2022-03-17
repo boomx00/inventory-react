@@ -21,7 +21,11 @@ const Inventory = (inventory) =>{
         { field: 'id', headerName: 'ID', width: 170 },
         { field: 'code', headerName: 'Code', width: 170 },
         { field: 'name', headerName: 'Name', width: 170 },
-        { field: 'stock', headerName: 'Stock', width: 170 },
+        { field: 'stock', headerName: 'Stock', width: 170,
+        renderCell:(params)=>(
+          params.row.stock<0? <p>0</p>:<p>{params.row.stock}</p>
+        )
+      },
         { field: 'price', headerName: 'Price', width: 170 },
 
         {
@@ -35,7 +39,7 @@ const Inventory = (inventory) =>{
                 color="primary"
                 size="small"
                 style={{ marginLeft: 16 }}
-                onClick={()=>redirect(params.row)}
+                onClick={()=>console.log(params.row)}
               >
                 Open
               </Button>

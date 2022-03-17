@@ -7,22 +7,22 @@ import { Button } from '@material-ui/core'
 const Purchase = () =>{
     const history = new useHistory()
     const redirect=(data)=>{
+      // console.log(data)
         history.push('/dashboard/purchase/view/'+data.id,{data:data})
     }
     const redirectPending=(data)=>{
-      console.log(data)
       history.push('/dashboard/pendingpurchase/view/'+data.id,{data:data})
   }
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 170 },
+        { field: 'id', headerName: 'ID', width: 170, descending:true },
         { field: 'code', headerName: 'Code', width: 170 },
         { field: 'date', headerName: 'Date', width: 170 },
         { field: 'supplier', headerName: 'Supplier', width: 170 },
         { field: 'status', headerName: 'Status', width: 170 },
+        { field: 'transaction', headerName: 'Transaction', width: 170 },
         { field: 'total', headerName: 'Total', width: 170 },
         { field: 'paid', headerName: 'Paid', width: 170 },
-        { field: 'unpaid', headerName: 'Unpaid', width: 170 },
         {
             field: 'button',
             headerName: 'Action',

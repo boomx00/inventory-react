@@ -31,6 +31,8 @@ const SalesInformation = (props) =>{
   const [notes,setNotes] = useState(props.data.notes)
   const [productTable, setProducts] = useState(props.products);
   const [displayProduct, setDisplayProduct] = useState(props.orders.products);
+  const [originalProducts, setOriginalProducts] = useState()
+  const [deletedProducts, setDeletedProducts] = useState([])
   const [Total, setTotal] = useState(props.data.total)
 
   const formData = {
@@ -53,8 +55,19 @@ const SalesInformation = (props) =>{
   }
   setTotal(total)
   });
+
+  const onEditTrigger = () =>{
+    setEditable(true)
+    setOriginalProducts(displayProduct)
+  }
   const addProduct = (data) => {
     const productCode = data.code;
+    const deletedCopy = [...deletedProducts]
+    const deletedIndex = deletedCopy.findIndex(deleted=>deleted.code == productCode)
+    if (deletedIndex!=-1){
+      deletedCopy.splice(index,1);
+      setDeletedProducts(deletedCopy)
+    }
     const array = displayProduct.map( obj => ({
       ...obj
     }))
@@ -88,31 +101,72 @@ const SalesInformation = (props) =>{
   };
   
   const editSales = () =>{
+    const newData=[]
+    const newProducts = displayProduct.map( obj => ({
+      ...obj
+    }))
+    displayProduct.forEach(function(dProduct){
+      const index = originalProducts.findIndex(prod=>prod.code==dProduct.code)
+      if(index==-1){
+        console.log(dProduct)
+        const difference = -dProduct.quantity
+        const data = {
+          code: dProduct.code,
+          difference: difference
+        }
+        newData.push(data)
+      }else{
+        const difference = originalProducts[index].quantity - dProduct.quantity
+        const data = {
+          code: dProduct.code,
+          difference: difference
+        }
+        newData.push(data)
+      }
+    })
+    
+    if (deletedProducts.length>0){
+      deletedProducts.forEach(function(deleted){
+        const data = {
+          code: deleted.code,
+          difference: deleted.quantity
+        }
+        newData.push(data)
+      })
+    }
     const data = {
       code:code,
       customer:customer,
       address:address,
       date:date,
       notes:notes,
-      products:displayProduct,
+      products:newData,
+      newProducts: displayProduct,
       total:Total
     }
+    // console.log(newData)
     dispatch(updateSalesAction(data));
-    // setEditable(false);
+    setEditable(false);
   }
 
   const setProductss = (data) =>{
-
+  
     setDisplayProduct(data)
   }
   const updateQuantity = (data)=>{
     setDisplayProduct(data)
 
   }
+  const setDeletedProduct=(data)=>{
+    const copyDeleted = [...deletedProducts]
+    copyDeleted.push(data)
+    setDeletedProducts(copyDeleted)
+  }
     return(
 <div>
       <SalesInformationForm data={formData} editable={editable}></SalesInformationForm>
-      <SalesInformationTable products={displayProduct} onSetProducts = {setProductss} onUpdateQuantity={updateQuantity} onEditSales={editSales} onToggleModal={setModalShow} total={Total} onEdit={setEditable} editable={editable}></SalesInformationTable>
+      {/* <div onClick={()=>console.log(displayProduct)}>aaa</div> */}
+      <SalesInformationTable products={displayProduct} onSetDelete={setDeletedProduct} onSetProducts = {setProductss} onUpdateQuantity={updateQuantity} onEditSales={editSales} onToggleModal={setModalShow} total={Total} onEdit={onEditTrigger} editable={editable}></SalesInformationTable>
       <ProductModal products={productTable} show={modalShow} onHide={()=>setModalShow(false)} onAddProducts={addProduct} ></ProductModal>
     </div>    )
 

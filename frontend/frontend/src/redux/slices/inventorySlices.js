@@ -36,17 +36,7 @@ export const inventorySlice = createSlice({
         if(finalQuantity>=0){
           newArray[index].stock = finalQuantity
         }
-        // else{
-        //   newArray[index].stock = 0
-
-        //   const data = {
-        //     quantity: product.quantity -newArray[index].stock ,
-        //     productCode: product.code,
-        //     salesRef: action.payload.code
-        //   }
-        //   purchaseData = [data,...purchaseData]
-          
-        // }
+    
       })
       
       state.inventory = newArray
@@ -57,9 +47,56 @@ export const inventorySlice = createSlice({
       action.payload.products.forEach(function(product){
           const productCode = product.code
           const inventoryIndex = state.inventory.findIndex(product=>product.code == productCode)
-          inventoryCopy[inventoryIndex].stock = 0
+          const newQuantity = product.stock-product.quantity
+          if(newQuantity>=0){
+            inventoryCopy[inventoryIndex].stock = newQuantity
+
+          }else{
+            inventoryCopy[inventoryIndex].stock = newQuantity
+
+          }
       })
       state.inventory = inventoryCopy
+  },
+  updateInventoryOnSalesUpdate:(state,action)=>{
+    const inventoryCopy = [...state.inventory]
+    action.payload.forEach(function(product){
+      const productCode = product.code
+      const inventoryIndex = state.inventory.findIndex(product=>product.code == productCode)
+      const newQuantity = inventoryCopy[inventoryIndex].stock + product.difference
+      if(newQuantity >= 0 ){
+        inventoryCopy[inventoryIndex].stock = newQuantity
+
+      }else{
+        inventoryCopy[inventoryIndex].stock = newQuantity
+
+      }
+     
+  })
+  },
+  updateInventoryOnPurchase:(state,action)=>{
+    const inventoryCopy = [...state.inventory]
+    action.payload.forEach(function(product){
+      const index = state.inventory.findIndex(inven=>inven.code == product.code)
+      inventoryCopy[index].stock = parseInt(inventoryCopy[index].stock) + parseInt(product.quantity)
+    })
+    state.inventory = inventoryCopy
+  },
+  updateInventoryOnPurchaseUpdate:(state,action)=>{
+    const inventoryCopy = [...state.inventory]
+    action.payload.forEach(function(product){
+      const productCode = product.code
+      const inventoryIndex = state.inventory.findIndex(product=>product.code == productCode)
+      const newQuantity = inventoryCopy[inventoryIndex].stock - product.difference
+      if(newQuantity >= 0 ){
+        inventoryCopy[inventoryIndex].stock = newQuantity
+
+      }else{
+        inventoryCopy[inventoryIndex].stock = newQuantity
+
+      }
+     
+  })
   }
   },
 });
@@ -68,7 +105,10 @@ export const { getInventory,
               addInventory,
               updateInventory,
               updateInventoryOnSales,
-            setInventoryStock } = inventorySlice.actions;
+            setInventoryStock,
+            updateInventoryOnSalesUpdate,
+            updateInventoryOnPurchase,
+            updateInventoryOnPurchaseUpdate } = inventorySlice.actions;
 
 export default inventorySlice.reducer;
 
@@ -103,6 +143,7 @@ export const updateInventoryOnSalesAction = (data)=>{
           if (finalQuantity >=0 ){
             const data = {
               quantity: product.quantity,
+              stock: product.stock,
               code: product.code
             }
             updateData = [data,...updateData]
@@ -120,14 +161,10 @@ export const updateInventoryOnSalesAction = (data)=>{
           }
           
         })
-
-
-        
-      
-
-        // dispatch(updateInventoryOnSales(updateData))
+        console.log(updateData)
         if(updatePurchase.length>0){
-          const pendingPurchase = {products:updatePurchase
+          const pendingPurchase = {
+            products:updatePurchase
             ,saleRef:data.saleRef,
             total: data.total,
             customer: data.customer
@@ -136,6 +173,49 @@ export const updateInventoryOnSalesAction = (data)=>{
             dispatch(createPendingPurchaseAction(pendingPurchase))
     }
 
+    if( updateData.length>0){
+      const updateInventory = {
+            products:updateData
+            ,saleRef:data.saleRef,
+            total: data.total,
+            customer: data.customer
+      }
+      dispatch(setInventoryStock(updateInventory))
+    }
+
+
+    }catch(err){
+
+    }
+  }
+}
+
+
+export const updateInventoryOnSalesUpdateAction=(data)=>{
+  return async (dispatch)=>{
+    try{
+      let updateData = {}
+      dispatch(updateInventoryOnSalesUpdate(data))
+     
+    }catch(err){
+
+    }
+  }
+}
+
+export const updateInventoryOnPurchaseAction=(data)=>{
+  return async(dispatch)=>{
+    try{
+      dispatch(updateInventoryOnPurchase(data))
+    }catch(err){
+
+    }
+  }
+}
+export const updateInventoryOnPurchaseUpdateAction=(data)=>{
+  return async(dispatch)=>{
+    try{
+      dispatch(updateInventoryOnPurchaseUpdate(data))
     }catch(err){
 
     }

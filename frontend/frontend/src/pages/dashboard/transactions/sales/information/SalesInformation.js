@@ -9,7 +9,7 @@ const SalesInformation = (props) =>{
     const code = props.history.location.state.data.code
     let test = [""]
     for(let i = 0; i < props.orders.length; i++){
-        if(props.orders[i].code == code){
+        if(props.orders[i].saleRef == code){
             test = props.orders[i]
             break;
         }
@@ -17,6 +17,7 @@ const SalesInformation = (props) =>{
 
     return(
     <DashboardLayout>
+        <div onClick={()=>console.log(props.orders)}>tester</div>
         <Information data={props.history.location.state.data} orders={test}></Information>
     </DashboardLayout>
     )

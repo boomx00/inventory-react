@@ -8,6 +8,9 @@ import purchaseSlice from './slices/purchaseSlices';
 import purchaseOrder from './slices/purchaseOrderSlices'
 import pendingPurchase from './slices/pendingPurchaseSlices'
 import pendingPurchaseOrder  from './slices/pendingPurchaseOrderSlices';
+import  installmentSlice  from './slices/installmentSlices';
+import  installmentPaymentSlice  from './slices/installmentPaymentSlices';
+import installmentPendingSlice from './slices/installmentPendingSlices';
 const reducer = combineReducers({
     auth: authSlice,
     inventory:InventorySlice,
@@ -17,7 +20,10 @@ const reducer = combineReducers({
     purchases: purchaseSlice,
     purchaseOrder: purchaseOrder,
     pendingPurchase:pendingPurchase,
-    pendingPurchaseOrder:pendingPurchaseOrder
+    pendingPurchaseOrder:pendingPurchaseOrder,
+    installment: installmentSlice,
+    installmentPayment: installmentPaymentSlice,
+    installmentPending:installmentPendingSlice
 });
 
 const rootReducer = (state, action) => {

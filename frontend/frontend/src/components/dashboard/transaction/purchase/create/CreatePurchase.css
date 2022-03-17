@@ -53,3 +53,29 @@ table {
     justify-content: flex-end;
     padding-top:10px;
 }
+.purchase-select{
+    width:auto;
+    height:30px;
+}
+.status-input{
+    width:50px;
+    margin-left: 10px;
+}
+.purchase-status-container{
+    width:50%;
+    display:flex;
+    flex-direction: column;
+}
+
+.status-wrapper{
+    display:flex;
+    flex-direction: row;
+}
+.status-container{
+    display:flex;
+    flex-direction: row;
+}
+.xs{
+    display:flex;
+    flex-direction: row;
+}

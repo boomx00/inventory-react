@@ -1,19 +1,35 @@
 import React, { useState, useEffect, useCallback,useRef } from 'react'
 import './ImageUploader.css'
-const ImageUploader = () =>{
+const ImageUploader = (props) =>{
     const fileInput = useRef(null);
     let imageArray = []
+    const [existingImage,setExistingImage] = useState(props.images)
     const[active,setActive] = useState(false);
     const[image, setImage] = useState(null);
-    const[previewUrl, setPreviewUrl] = useState([]); 
+    const[previewUrl, setPreviewUrl] = useState(props.images); 
+    useEffect(() => {
+       props.onSetImage(previewUrl)
+    });
     const handleFile = file => {
+        setImage(file);
         setPreviewUrl(file)
-        //you can carry out any file validations here...
-        // setImage(file);
-        // setPreviewUrl(URL.createObjectURL(file));
     }
 
-    const getImage = () =>{
+    const getImage = (data) =>{
+        // let url = URL.createObjectURL(data)
+        // console.log(url)
+        if(previewUrl.length == 0)
+        {
+            imageArray.push(data);
+        setActive(true)
+        handleFile(imageArray);
+    }else{
+        const array = [...previewUrl];
+        console.log(array)
+        array.push(data)
+        handleFile(array);
+        }
+     
 
     }
     
@@ -52,25 +68,30 @@ const ImageUploader = () =>{
     let btn_class = active ? "image-preview" : "";
     return(
         <div className="imageuploader-wrapper">
-        <div 
+      {props.state=="view"?null: 
+       <div 
           className="drop_zone"
           onDragOver = {handleOndragOver}
           onDrop = {handleOnDrop}
-          onClick = { () => fileInput.current.click()}
+          onClick = { () => 
+            fileInput.current.click()
+            // console.log(existingImage)
+        }
         > 
-          <p>Click to select or Drag and drop image here....</p>
+          <p >Click to select or Drag and drop image here....</p>
           <input 
            type="file" 
            accept='image/*' 
            ref={fileInput} hidden 
-           onChange={e => handleFile(e.target.files[0])}
+           onChange={e => getImage(e.target.files[0])}
           />
-        </div>
+        </div>}
         <div className={active ? "image-preview" : ""}>
-        {previewUrl  &&
+        {
+        previewUrl  &&
             previewUrl.map((object, i) =>
             <div className="image-size"> 
-                <h2 className="image-x" onClick={()=>testClicked(i)}>X</h2>
+                {props.state=="view"?null: <h2 className="image-x" onClick={()=>testClicked(i)}>X</h2>}
                 <img src={URL.createObjectURL(object)} alt='image'/>
             </div>
             )

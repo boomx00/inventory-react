@@ -24,7 +24,8 @@ import DashboardPendingPurchaseView from '../pages/dashboard/transactions/purcha
 
 import DashboardPurchaseInstallment from '../pages/dashboard/installment/purchase/PurchaseInstallment'
 import DashboardPurchaseInstallmentCreate from '../pages/dashboard/installment/purchase/create/PurchaseInstallmentCreate'
-
+import DashboardPurchaseInstallmentView from '../pages/dashboard/installment/purchase/information/PurchaseInstallmentInformation'
+import DashboardPendingPurchaseInstallmentView from '../pages/dashboard/installment/purchase/information/PendingPurchaseInstallmentInformation'
 import DashboardCatalog from '../pages/dashboard/catalog/Catalog'
 import NotFound from '../pages/notfound/NotFound'
 import { connect } from 'react-redux'
@@ -50,7 +51,7 @@ const Index = ({ isLogged }) => {
 
       </Route>
       
-        {isLogged?<Route  path='/dashboard/:path?/:path?/:path?' exact>
+        {isLogged?<Route  path='/dashboard/:path?/:path?/:path?/:path?' exact>
           <Switch>
             <Route path='/dashboard/login' exact component={Login} />
             <Route path='/dashboard/inventory' exact component={DashboardInventory} />
@@ -72,7 +73,8 @@ const Index = ({ isLogged }) => {
             <Route path='/dashboard/pendingpurchase/view/:path?' exact component={DashboardPendingPurchaseView}/>
             <Route path='/dashboard/installment/purchase'  exact component={DashboardPurchaseInstallment}/>
             <Route path='/dashboard/installment/purchase/create'  exact component={DashboardPurchaseInstallmentCreate}/>
-
+            <Route path='/dashboard/installment/purchase/view/:path?' exact component={DashboardPurchaseInstallmentView}/>
+            <Route path='/dashboard/pendinginstallment/view/:path?' exact component={DashboardPendingPurchaseInstallmentView}/>
             <Route path='*' component={NotFound}/>
 
           </Switch>

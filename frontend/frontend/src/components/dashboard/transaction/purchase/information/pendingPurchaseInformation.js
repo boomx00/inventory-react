@@ -6,9 +6,15 @@ import { useState, useEffect } from "react"
 import { createPurchaseAction } from "../../../../../redux/slices/purchaseSlices"
 const PendingPurchaseInformation=(props)=>{
     const dispatch = useDispatch()
+    const [code,setCode] = new useState(props.data.saleRef)
+    const [supplier,setSupplier] = new useState()
+    const [date,setDate] = new useState()
+    const [notes,setNotes] = new useState()
+    const [status, setStatus] = new useState("paid")
     const [formData,setFormData] = new useState(props.data)
     const [displayProduct,setDisplayProduct] = new useState([])
     const [total, setTotal] = new useState(props.data.total)
+    const [days,setDays] = new useState(0)
     const [modalShow, setModalShow] = new useState(false);
     const [productTable,setProductTable] = new useState(props.product)
     const [saleRef,setSaleRef] = new useState(props.data.saleRef)
@@ -70,19 +76,25 @@ const PendingPurchaseInformation=(props)=>{
         // console.log(productTable)
       };
       const createPurchase = ()=>{
+        let day = days;
+       if(status=="paid"){
+         day = 0
+       }
         const data ={
-            code:formData.code,
-            supplier:formData.supplier,
-            date:formData.date,
-            notes:formData.notes,
+            pending: true,
+            code:code,
+            supplier:supplier,
+            date:date,
+            notes:notes,
             saleRef: saleRef,
             total:total,
-            status:"paid",
+            status:status,
+            days:day,
             unpaid:0,
             products: displayProduct
         }
-
-        // // console.log(data)
+        
+        console.log(data)
         dispatch(createPurchaseAction(data))
     }
 
@@ -91,8 +103,8 @@ const PendingPurchaseInformation=(props)=>{
     }
     return(
         <div>
-            <p onClick={()=>console.log(productTable)}>asdfasdf</p>
-            <PurchaseForm data={formData} onSetData={setData} editable={editable}  action={"create"}></PurchaseForm>
+            {/* <p onClick={()=>console.log(productTable)}>asdfasdf</p> */}
+            <PurchaseForm data={formData} status={status} onSetData={setData} editable={editable}  action={"create"} onSetSaleRef={setSaleRef} onSetData={setData} onSetCode={setCode} onSetSupplier={setSupplier} onSetDate={setDate} onSetNotes={setNotes} onSetStatus={setStatus} onSetDays={setDays}></PurchaseForm>
             <PurchaseTable data={displayProduct} total={total} editable={editable} onSetEditable={setEditable} onUpdatePrice={updatePrice} onUpdateQuantity={updateQuantity} onToggleModal={setModalShow}  action={"create"} onCreatePurchase={createPurchase}></PurchaseTable>
             <PendingProductModal products={productTable} show={modalShow} onHide={()=>setModalShow(false)} onAddProducts={addProduct} ></PendingProductModal>
 

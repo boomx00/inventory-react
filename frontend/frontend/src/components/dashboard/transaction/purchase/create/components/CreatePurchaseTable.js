@@ -7,7 +7,7 @@ const CreatePurchaseTable = (props) =>{
     const history = new useHistory()
   const [modalShow, setModalShow] = useState(false);
   const [edit,setEdit] = useState(false);
-  const [total,setTotal] = useState();
+  const [total,setTotal] = useState(props.total);
   let counter = 0;
   const useStyles = makeStyles((theme) => ({
     customWidth: {
@@ -65,11 +65,14 @@ const CreatePurchaseTable = (props) =>{
         }
     }
     array.splice(index, 1);
-    props.onDeleteProduct(array)
+    props.onSetDelete(data);
+    props.onSetProducts(array)
   }
   const createPurchase=()=>{
-    // console.log('ss')
     props.onCreatePurchase()
+  }
+  const editPurchase=()=>{
+    props.onEditPurchase()
   }
 
   const setEditable=(data)=>{
@@ -115,8 +118,11 @@ const CreatePurchaseTable = (props) =>{
                 </div>
                 </div>
                 </td>
+
               <td>
-                <input type="number" onChange={(text)=>onTotalChange(text.target.value,products.code)}>
+                <input type="number"                 disabled={props.editable?false: edit?false:true}
+  value={products.price} 
+  onChange={(text)=>onTotalChange(text.target.value,products.code)}>
                 
                 </input>
                 </td>
@@ -131,6 +137,7 @@ const CreatePurchaseTable = (props) =>{
                         name: products.name,
                         price: products.price,
                         stock: products.stock,
+                        quantity: products.quantity
                       };
 
                       deleteProduct(data);
@@ -144,7 +151,7 @@ const CreatePurchaseTable = (props) =>{
           <div className="create-sales-total">
             <h3>Total</h3>
             <input 
-            value={total} 
+            value={props.total} 
             disabled={true}></input>
             </div>
           <div className="create-sales-paid">

@@ -10,12 +10,18 @@ export const pendingPurchaseOrderSlice = createSlice({
         createPendingPurchaseOrder:(state,action)=>{
             state.pendingPurchaseOrders = [action.payload,...state.pendingPurchaseOrders]
         },
-       
+       removePendingPurchaseOrder:(state,action)=>{
+           const copyPurchaseOrder = [state.pendingPurchaseOrders]
+           const index= copyPurchaseOrder.findIndex(order=>order.saleRef==action.payload)
+           copyPurchaseOrder.splice(index,1)
+           state.pendingPurchaseOrders = copyPurchaseOrder
+       }
     }
 })
 
 export const {
-    createPendingPurchaseOrder
+    createPendingPurchaseOrder,
+    removePendingPurchaseOrder
 } = pendingPurchaseOrderSlice.actions;
 
 export default pendingPurchaseOrderSlice.reducer
@@ -28,6 +34,17 @@ export const createPendingPurchaseOrderAction=(data)=>{
             // dispatch(createPendingPurchaseOrder(data))
             // dispatch(createPurchase(data))
             // dispatch(addPurchaseOrder(newPurchaseOrder))
+        }
+        catch(err){
+
+        }
+    }
+}
+
+export const removePendingPurchaseOrderAction=(data)=>{
+    return async(dispatch)=>{
+        try{
+            dispatch(removePendingPurchaseOrder(data))
         }
         catch(err){
 

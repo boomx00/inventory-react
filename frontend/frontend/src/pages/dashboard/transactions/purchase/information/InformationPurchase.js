@@ -14,8 +14,8 @@ const InformationPurchase = (props)=>{
     }
     return(
         <DashboardLayout>
-            <div onClick={()=>console.log(props)}>a</div>
-            <PurchaseInformation data={props.location.state.data} orders={test}></PurchaseInformation>
+            <div onClick={()=>console.log(props.location.state.data.status)}>a</div>
+            <PurchaseInformation data={props.location.state.data} status={props.location.state.data.status} days={props.location.state.data.days} orders={test}></PurchaseInformation>
         </DashboardLayout>
         )
 }

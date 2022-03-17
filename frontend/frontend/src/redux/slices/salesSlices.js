@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addOrdersAction, updateOrdersAction } from "./orderSlices";
-import { updateInventoryOnSalesAction } from "./inventorySlices";
+import { updateInventoryOnSalesAction,updateInventoryOnSalesUpdateAction } from "./inventorySlices";
 export const salesSlice = createSlice({
     name:"sales",
     initialState:{
@@ -51,7 +51,6 @@ export const createSalesAction =(data)=>{
             }
             dispatch(createSales(salesData))
             dispatch(addOrdersAction(ordersData))
-            // console.log("asdfasdf")
             dispatch(updateInventoryOnSalesAction(ordersData))
         }catch(err){
 
@@ -71,12 +70,15 @@ export const updateSalesAction=(data)=>{
                 status:"paid"
             }
             const newOrders = {
-                products: data.products,
-                code: data.code
+                products: data.newProducts,
+                saleRef: data.code,
+                customer: data.customer,
+                total: data.total
             }
-            console.log(data.total)
+            console.log(newOrders)
             dispatch(updateSales(newSalesData))
             dispatch(updateOrdersAction(newOrders))
+            dispatch(updateInventoryOnSalesUpdateAction(data.products))
         }catch(err){
 
         }

@@ -8,24 +8,19 @@ import InstallmentPurchase from '../../../../components/dashboard/installment/pu
 import { connect, useDispatch } from 'react-redux'
 import {addInventoryAction} from '../../../../redux/slices/inventorySlices'
 
-const PurchaseInstallment = (inventory)=>{
+const PurchaseInstallment = (props)=>{
   const dispatch = useDispatch()
-  const [newRow,setRows]= useState(inventory.inventory);
 
-   
-      
-      const testfunction=()=>{
-        const data ={id:10,name:'Jamet',age:50}
-        dispatch(addInventoryAction(data))
-      }
     return(
         <DashboardLayout>
-            <InstallmentPurchase></InstallmentPurchase>
+          <div onClick={()=>{console.log(props.installmentPending)}}>a</div>
+            <InstallmentPurchase data={props.installment} pending={props.installmentPending}> </InstallmentPurchase>
         </DashboardLayout>
     )
 
 }
 const mapStateToProps = (state) => ({
-  inventory: state.inventory.inventory,
+  installment: state.installment,
+  installmentPending: state.installmentPending
 })
 export default connect(mapStateToProps, null)(PurchaseInstallment)

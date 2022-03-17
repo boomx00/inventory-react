@@ -1,0 +1,14 @@
+.mm{
+    height:50px;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: #8D021F;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    /* line-height: 50px; */
+}
+.confirmButton{
+    /* margin-right: 0; */
+    margin-left:auto;
+}

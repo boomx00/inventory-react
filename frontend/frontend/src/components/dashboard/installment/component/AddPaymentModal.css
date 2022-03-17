@@ -1,0 +1,8 @@
+.payment-modal-body{
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-modal-body input{
+    width:40%;
+}

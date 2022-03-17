@@ -65,7 +65,7 @@ const InventoryCreate = ()=>{
                 value={category}
                 onChange={(text)=>{setCategory(text.target.value)}}
                 ></input>
-                <ImageUploader></ImageUploader>
+                <ImageUploader onSetImage={()=>console.log('aa')}></ImageUploader>
                 
                 <button onClick={newInventory}>Create</button>
             </form>

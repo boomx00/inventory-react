@@ -6,8 +6,8 @@ const PurchaseInstallmentCreate = ()=>{
     const [modalShow,setModalShow] = new useState(false)
     return(
         <div>
-            <PurchaseInstallmentForm></PurchaseInstallmentForm>
-            <PurchaseInstallmentTable onToggleModal={setModalShow}></PurchaseInstallmentTable>
+            <PurchaseInstallmentForm ></PurchaseInstallmentForm>
+            <PurchaseInstallmentTable onToggleModal={setModalShow} payment={[]}></PurchaseInstallmentTable>
             <AddPaymentModal show={modalShow} onHide={()=>setModalShow(false)}></AddPaymentModal>
         </div>
     )

@@ -29,17 +29,16 @@ const SalesInformationTable=(props)=>{
             }
         }
         array.splice(index, 1);
-        // console.log(array)
 
-        // // console.log(array)
+        props.onSetDelete(data);
         props.onSetProducts(array)
+
       }
 
       const updateQuantity = (value,code) =>{
         const array = props.products.map( obj => ({
           ...obj
         }))
-    
           let index = 0;
           for(let i = 0 ; i < array.length;i++){
               if(code == array[i].code){
@@ -47,9 +46,6 @@ const SalesInformationTable=(props)=>{
               }
           }
           array[index].quantity = value
-    
-          // console.log(array)
-          
           props.onUpdateQuantity(array)
       }
       const editSales = () =>{
@@ -99,6 +95,7 @@ const SalesInformationTable=(props)=>{
                         name: products.name,
                         price: products.price,
                         stock: products.stock,
+                        quantity: products.quantity
                       };
                       deleteProduct(data);
                     }}
